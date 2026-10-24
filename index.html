@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+		<!-- Colour of the phone browser bar (Kuriftu cream) -->
+		<meta name="theme-color" content="#FCFAF3">
+		<title>Kuriftu Hotel Samara</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+		<!-- Fonts: Playfair Display SC (headings) and Karla (text) from Google Fonts -->
+		<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&amp;family=Playfair+Display+SC:wght@400;700&amp;display=swap" rel="stylesheet">
+
+		<!-- Site styles: every colour, size and layout rule is in css/style.css -->
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+
+		<!-- Skip link: lets keyboard users jump past the menu to the main content -->
+		<a class="skip" href="#main">Skip to content</a>
+
+		<!-- HEADER: logo, menu button (phones) and main navigation -->
+		<header>
+			<div class="w">
+				<a class="logo" href="#home" aria-label="Kuriftu Hotel Samara, home">
+					Kuriftu
+					<small>Hotel Samara</small>
+				</a>
+				<!-- Menu button: shown on phones and tablets only. Opens and closes #nav (js/common.js) -->
+				<button class="burger" id="bg" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+					<svg class="i" viewBox="0 0 24 24">
+						<path d="M4 7h16M4 12h16M4 17h16"/>
+					</svg>
+				</button>
+				<!-- MAIN MENU: each .dd button opens a dropdown (.sub) of links -->
+				<nav id="nav" aria-label="Main">
+					<ul>
+						<li><a href="#home">Home</a></li>
+						<li>
+							<button class="dd" aria-expanded="false">
+								Accommodation
+								<svg class="i" viewBox="0 0 24 24">
+									<path d="m6 9 6 6 6-6"/>
+								</svg>
+							</button>
+							<div class="sub">
+								<a href="rooms.html">Standard Room</a>
+								<a href="rooms.html">Premium Room</a>
+								<a href="rooms.html">Family Suite</a>
+								<a href="rooms.html">Executive Suite</a>
+								<a href="rooms.html">Presidential Suite</a>
+							</div>
+						</li>
+						<li>
+							<button class="dd" aria-expanded="false">
+								Features
+								<svg class="i" viewBox="0 0 24 24">
+									<path d="m6 9 6 6 6-6"/>
+								</svg>
+							</button>
+							<div class="sub">
+								<a href="dining.html">Restaurant &amp; Bar</a>
+								<a href="recreation.html">Recreation</a>
+								<a href="events.html">Events</a>
+							</div>
+						</li>
+						<li><a href="#sights">Gallery</a></li>
+						<li><a href="#contact">Contact</a></li>
+						<li><a class="btn cta" href="#bk">Book now</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<!-- MAIN CONTENT -->
+		<main id="main">
+
+			<!-- HERO SLIDESHOW: 3 slides changed by js/home.js. Slide photos are .s1 .s2 .s3 in css/style.css -->
+			<div class="hero" id="home" role="region" aria-roledescription="carousel" aria-label="Featured">
+				<div class="slide on s1" role="group" aria-label="1 of 3">
+					<div class="w">
+						<h1>Rest well in the heart of Afar</h1>
+						<p>Warm Ethiopian hospitality, quiet rooms and good food in Samara.</p>
+						<a class="btn" href="#bk">Check availability</a>
+					</div>
+				</div>
+				<div class="slide s2" role="group" aria-label="2 of 3">
+					<div class="w">
+						<h2>Stay longer, save more</h2>
+						<p>Ask our team about extended-stay and group rates.</p>
+						<a class="btn" href="#bk" data-pre="Special offers">See offers</a>
+					</div>
+				</div>
+				<div class="slide s3" role="group" aria-label="3 of 3">
+					<div class="w">
+						<h2>Meetings, weddings and celebrations</h2>
+						<p>Spaces and a team to host your event with ease.</p>
+						<a class="btn" href="events.html">Plan an event</a>
+					</div>
+				</div>
+				<!-- Slideshow controls: pause, previous, next, and dots (the dots are added by js/home.js) -->
+				<div class="ctl">
+					<div class="w">
+						<button class="cb" id="pp" aria-label="Pause slideshow">
+							<svg class="i" viewBox="0 0 24 24">
+								<path d="M8 5v14M16 5v14"/>
+							</svg>
+						</button>
+						<button class="cb" id="prev" aria-label="Previous slide">
+							<svg class="i" viewBox="0 0 24 24">
+								<path d="m15 18-6-6 6-6"/>
+							</svg>
+						</button>
+						<button class="cb" id="next" aria-label="Next slide">
+							<svg class="i" viewBox="0 0 24 24">
+								<path d="m9 18 6-6-6-6"/>
+							</svg>
+						</button>
+						<div class="dots" id="dots"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- QUICK BOOKING BAR: choose dates and guests. Checked by js/home.js -->
+			<div class="book" id="bk">
+				<form id="bf" novalidate>
+					<div>
+						<label for="ci">Check-in</label>
+						<input type="date" id="ci" required>
+						<div class="err" id="e1">Choose a check-in date.</div>
+					</div>
+					<div>
+						<label for="co">Check-out</label>
+						<input type="date" id="co" required>
+						<div class="err" id="e2">Choose a date after check-in.</div>
+					</div>
+					<div>
+						<label for="ad">Adults</label>
+						<select id="ad">
+							<option>1</option>
+							<option selected>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+					</div>
+					<div>
+						<label for="ch">Children</label>
+						<select id="ch">
+							<option>0</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select>
+					</div>
+					<div style="padding-top:26px">
+						<button class="btn d" type="submit">Check availability</button>
+					</div>
+				</form>
+			</div>
+
+			<!-- WELCOME: intro text, "Read more" toggle and highlight icons (#feat is filled by js/home.js) -->
+			<section>
+				<div class="w">
+					<p class="date" id="today"></p>
+					<h2 class="t">Welcome to Kuriftu Hotel Samara</h2>
+					<p class="lead">
+						A calm base in Samara, the capital of the Afar region. Comfortable rooms, honest food and a team that looks after you, whether you are here for work, a stopover or the landscape.
+					</p>
+					<div class="more" id="more">
+						<div>
+							<p class="lead" style="margin-top:14px">
+								Rooms and suites include Wi-Fi and modern comforts. We can arrange meetings, conferences, weddings and tailor-made events, plus transport and local excursions. Tell us what you need and we will plan around it.
+							</p>
+						</div>
+					</div>
+					<button class="rm" id="rm" aria-expanded="false" aria-controls="more">Read more</button>
+					<div class="feat" id="feat"></div>
+				</div>
+			</section>
+
+			<!-- SERVICES: four photo + text blocks. Each button opens that service's own page -->
+			<section class="alt" id="rooms">
+				<div class="w">
+					<!-- Rooms & Suites block, links to rooms.html -->
+					<div class="row">
+						<div class="ph p7" data-l="Rooms and suites"></div>
+						<div>
+							<h3>Rooms &amp; Suites</h3>
+							<p>
+								Standard and Premium rooms, Family, Executive and Presidential suites, made for short stays and long ones.
+							</p>
+							<a class="btn d" href="rooms.html">Book a room</a>
+						</div>
+					</div>
+					<!-- Dining block, links to dining.html -->
+					<div class="row" id="dining">
+						<div class="ph p5" data-l="Restaurant and bar"></div>
+						<div>
+							<h3>Dining</h3>
+							<p>
+								All-day dining with Ethiopian and international dishes, fresh coffee, and a relaxed bar for the evening.
+							</p>
+							<a class="btn d" href="dining.html">Reserve a table</a>
+						</div>
+					</div>
+					<!-- Events block, links to events.html -->
+					<div class="row" id="events">
+						<div class="ph p2" data-l="Events"></div>
+						<div>
+							<h3>Events</h3>
+							<p>
+								Meeting rooms and a hall for conferences, weddings and special occasions, with equipment and a dedicated team.
+							</p>
+							<a class="btn d" href="events.html">Enquire about events</a>
+						</div>
+					</div>
+					<!-- Recreation block, links to recreation.html -->
+					<div class="row" id="recreation">
+						<div class="ph p6" data-l="Recreation"></div>
+						<div>
+							<h3>Recreation</h3>
+							<p>Rest and recharge with our pool, fitness and relaxation facilities.</p>
+							<a class="btn d" href="recreation.html">Plan your visit</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- GALLERY: photo cards are created by js/home.js. Clicking one opens the photo large -->
+			<section id="sights">
+				<div class="w">
+					<h2 class="t">Gallery</h2>
+					<p class="lead" style="margin-bottom:var(--sp3)">
+						A look around Kuriftu Hotel Samara. Tap a photo to enlarge it.
+					</p>
+					<div class="grid" id="sg"></div>
+				</div>
+			</section>
+
+			<!-- CONTACT: map buttons, contact details and newsletter form -->
+			<section class="alt" id="contact">
+				<div class="w">
+					<h2 class="t">Find us</h2>
+					<div class="map">
+						<!-- Map panel: the buttons open Google Maps at the hotel coordinates -->
+						<div class="mp bgmap">
+							<div>
+								<svg class="i" viewBox="0 0 24 24" style="width:40px;height:40px;color:var(--clay)">
+									<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/>
+									<circle cx="12" cy="10" r="3"/>
+								</svg>
+								<p>Kuriftu Hotel Samara<br>Samara, Afar, Ethiopia</p>
+								<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+									<a class="btn d" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=11.790987722629863,40.997588932557825">
+										Open in Google Maps
+									</a>
+									<a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=11.790987722629863,40.997588932557825">
+										Get directions
+									</a>
+								</div>
+							</div>
+						</div>
+						<div>
+							<ul class="list">
+								<li>Location: 11.79099, 40.99759 (Samara, Afar)</li>
+								<li>Email: reservation@kuriftusamara.example</li>
+								<li>Phone: +251 00 000 0000</li>
+								<li>Check-in from 2:00 PM, check-out by 12:00 PM</li>
+							</ul>
+							<h3 style="font-size:22px;margin:30px 0 6px">Get our offers</h3>
+							<p style="color:var(--mu)">One email when we have a new offer. No spam.</p>
+							<!-- Newsletter form (checked by js/home.js) -->
+							<form class="sf" id="sf" novalidate>
+								<div>
+									<label for="se">Email address</label>
+									<input type="email" id="se" autocomplete="email">
+									<div class="err">Enter a valid email, like name@example.com.</div>
+								</div>
+								<div>
+									<label for="sl">Language</label>
+									<select id="sl">
+										<option>English</option>
+										<option>Amharic</option>
+									</select>
+								</div>
+								<div style="padding-top:26px">
+									<button class="btn d" type="submit">Subscribe</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- FOOTER: link columns and copyright -->
+		<footer>
+			<div class="w">
+				<div class="fg">
+					<div>
+						<h4>Book online or call</h4>
+						<ul>
+							<li>reservation@kuriftusamara.example</li>
+							<li>+251 00 000 0000</li>
+						</ul>
+					</div>
+					<div>
+						<h4>Stay</h4>
+						<ul>
+							<li><a href="rooms.html">Rooms &amp; Suites</a></li>
+							<li><a href="dining.html">Dining</a></li>
+							<li><a href="events.html">Events</a></li>
+							<li><a href="recreation.html">Recreation</a></li>
+						</ul>
+					</div>
+					<div>
+						<h4>Explore</h4>
+						<ul>
+							<li><a href="#sights">Gallery</a></li>
+							<li><a href="#bk">Book now</a></li>
+							<li><a href="#contact">Contact</a></li>
+						</ul>
+					</div>
+					<div>
+						<h4>Follow us</h4>
+						<ul>
+							<li><a href="https://kurifturesorts.com" target="_blank" rel="noopener">Kuriftu Resorts</a></li>
+							<li><a href="#" data-soon>Facebook</a></li>
+							<li><a href="#" data-soon>Instagram</a></li>
+							<li><a href="#" data-soon>YouTube</a></li>
+						</ul>
+					</div>
+				</div>
+				<p class="cp">© 2026 Kuriftu Hotel Samara</p>
+			</div>
+		</footer>
+
+		<!-- Floating Feedback button: opens a feedback form (js/common.js) -->
+		<button class="fab" id="fb">
+			<svg class="i" viewBox="0 0 24 24">
+				<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+			</svg>
+			<span>Feedback</span>
+		</button>
+
+		<!-- Pop-up dialog: used for confirmations, feedback and enlarged photos -->
+		<div class="md" id="md" role="dialog" aria-modal="true" aria-label="Dialog">
+			<div class="mb">
+				<button class="x" id="mx" aria-label="Close">
+					<svg class="i" viewBox="0 0 24 24">
+						<path d="M18 6 6 18M6 6l12 12"/>
+					</svg>
+				</button>
+				<div id="mc"></div>
+			</div>
+		</div>
+
+		<!-- Toast: short message that appears at the bottom of the screen -->
+		<div id="toast" role="status" aria-live="polite"></div>
+
+		<!-- SCRIPTS: common.js is shared by every page (menu, pop-up, toast, feedback); the second file is specific to this page -->
+		<script src="js/common.js"></script>
+		<script src="js/home.js"></script>
+	</body>
+</html>

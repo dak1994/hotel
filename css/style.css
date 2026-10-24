@@ -1,0 +1,1097 @@
+/* Kuriftu Hotel Samara: styles. Brand colours are the variables at the top. */
+/* Brand tokens: cream is taken from kurifturesorts.com theme-color; the rest is an earthy Afar-desert palette, swap here */
+
+/* ============================================================
+   BRAND COLOURS & SPACING
+   Change a colour here and it updates everywhere on the site.
+   ============================================================ */
+:root {
+	--cream: #FCFAF3;  /* page background (taken from kurifturesorts.com) */
+	--sand: #F3EBDA;  /* light panel colour */
+	--line: #E4D9C2;  /* thin borders */
+	--clay: #8A3F26;  /* main brand colour: headings, dark buttons, links */
+	--clay-d: #6B2E1B;  /* darker clay for hover */
+	--gold: #D9A441;  /* highlight colour for main buttons */
+	--ink: #2B1D14;  /* main text colour */
+	--mu: #6A5848;  /* softer text colour */
+	--sea: #2F6F6B;  /* teal accent: focus ring, dates, feedback button */
+	--sp1: 8px;  /* spacing steps used for gaps and padding */
+	--sp2: 16px;
+	--sp3: 24px;
+	--sp4: 40px;
+	--sp5: 72px;
+	background: var(--cream);  /* page background */
+	padding-top: env(safe-area-inset-top, 0px);  /* keeps content clear of the phone notch */
+	padding-bottom: env(safe-area-inset-bottom, 0px);  /* keeps content clear of the home bar */
+	box-sizing: border-box;
+}
+
+/* ============================================================
+   BASE STYLES
+   Reset, default text, headings, links and the keyboard focus ring.
+   ============================================================ */
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+/* Smooth scrolling to #links, with space left for the sticky header */
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 84px;
+}
+/* Default text: Karla font on the cream background */
+body {
+	font: 17px/1.6 Karla, system-ui, sans-serif;
+	background: var(--cream);
+	color: var(--ink);
+}
+/* Headings use the serif display font */
+h1, h2, h3 {
+	font-family: "Playfair Display SC", Georgia, serif;
+	font-weight: 700;
+	line-height: 1.15;
+}
+/* Links have no underline by default */
+a {
+	color: inherit;
+	text-decoration: none;
+}
+/* Buttons and fields copy the page font and show a pointer */
+button, input, select {
+	font: inherit;
+	color: inherit;
+}
+button, a, select, summary {
+	cursor: pointer;
+}
+:focus-visible {
+	outline: 3px solid var(--sea);
+	outline-offset: 3px;
+}
+
+/* ============================================================
+   ICONS
+   All line icons share this size and stroke.
+   ============================================================ */
+svg.i {
+	width: 1.3em;
+	height: 1.3em;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.8;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	flex: none;
+}
+
+/* ============================================================
+   LAYOUT
+   .w is the centred content column used inside every section.
+   ============================================================ */
+.w {
+	max-width: 1160px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+/* ============================================================
+   SKIP LINK
+   Hidden until a keyboard user tabs to it.
+   ============================================================ */
+.skip {
+	position: absolute;
+	left: -999px;
+	background: var(--ink);
+	color: #fff;
+	padding: 10px 16px;
+	z-index: 300;
+}
+/* Shows the skip link when focused */
+.skip:focus {
+	left: 8px;
+	top: 8px;
+}
+
+/* ============================================================
+   HEADER & MENU
+   Sticky top bar, logo, and navigation with dropdowns (becomes a phone menu in the responsive rules below).
+   ============================================================ */
+header {
+	position: sticky;
+	top: 0;
+	z-index: 60;
+	background: rgba(252, 250, 243, .94);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid var(--line);
+}
+header .w {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 76px;
+	gap: 16px;
+}
+/* Text logo in the header */
+.logo {
+	font: 700 22px/1 "Playfair Display SC", serif;
+	color: var(--clay);
+	display: flex;
+	flex-direction: column;
+}
+.logo small {
+	font: 600 12px Karla;
+	letter-spacing: .14em;
+	color: var(--mu);
+	margin-top: 4px;
+}
+/* Menu list laid out in a row */
+nav ul {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+nav li {
+	position: relative;
+}
+/* Menu links and dropdown buttons: at least 44px tall for easy tapping */
+nav a, nav .dd {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	min-height: 44px;
+	padding: 0 14px;
+	background: none;
+	border: 0;
+	border-radius: 999px;
+	font-weight: 600;
+	transition: background .2s, color .2s;
+}
+nav a:hover, nav .dd:hover {
+	background: var(--sand);
+	color: var(--clay);
+}
+/* "Book now" menu button */
+nav .cta {
+	background: var(--clay);
+	color: #fff;
+	margin-left: 8px;
+}
+nav .cta:hover {
+	background: var(--clay-d);
+	color: #fff;
+}
+/* Dropdown panel, hidden until its button is opened */
+.sub {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	min-width: 210px;
+	background: var(--cream);
+	border: 1px solid var(--line);
+	border-radius: 14px;
+	box-shadow: 0 16px 40px rgba(60, 35, 15, .15);
+	padding: 8px;
+	flex-direction: column;
+}
+nav li.open>.sub {
+	display: flex;
+}
+nav li:hover>.sub {
+	display: flex;
+}
+.sub a {
+	border-radius: 8px;
+}
+/* Phone menu button, hidden on desktop */
+.burger {
+	display: none;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 1px solid var(--line);
+	background: var(--cream);
+}
+
+/* ============================================================
+   HERO SLIDESHOW
+   Full-width photo slides with text, plus the pause / previous / next controls.
+   ============================================================ */
+.hero {
+	position: relative;
+	min-height: min(86vh, 680px);
+	overflow: hidden;
+	color: #fff;
+}
+/* One slide: stacked on top of each other, only .on is visible */
+.slide {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .9s, visibility .9s;
+	display: flex;
+	align-items: center;
+}
+/* The slide currently showing */
+.slide.on {
+	opacity: 1;
+	visibility: visible;
+	z-index: 1;
+}
+.slide svg.sc {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+.slide .w {
+	position: relative;
+	width: 100%;
+	padding-bottom: 60px;
+}
+.slide h1, .slide h2 {
+	font-size: clamp(34px, 6vw, 64px);
+	max-width: 11em;
+	text-shadow: 0 2px 20px rgba(40, 15, 5, .45);
+}
+.slide p {
+	max-width: 30em;
+	margin: 18px 0 28px;
+	font-size: 19px;
+	text-shadow: 0 1px 12px rgba(40, 15, 5, .5);
+}
+
+/* ============================================================
+   BUTTONS
+   .btn is the gold button; add .d for the dark clay version.
+   ============================================================ */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	min-height: 48px;
+	padding: 0 28px;
+	border-radius: 999px;
+	border: 0;
+	background: var(--gold);
+	color: var(--ink);
+	font-weight: 700;
+	transition: transform .2s, background .2s;
+}
+.btn:hover {
+	background: #E6B456;
+	transform: translateY(-1px);
+}
+.btn.d {
+	background: var(--clay);
+	color: #fff;
+}
+.btn.d:hover {
+	background: var(--clay-d);
+}
+.ctl {
+	position: absolute;
+	z-index: 3;
+	bottom: 104px;
+	left: 0;
+	right: 0;
+}
+.ctl .w {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+/* Round slideshow buttons */
+.cb {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 1px solid rgba(255, 255, 255, .7);
+	background: rgba(43, 29, 20, .45);
+	color: #fff;
+	display: grid;
+	place-items: center;
+	transition: background .2s;
+}
+.cb:hover {
+	background: rgba(43, 29, 20, .75);
+}
+/* Slide dots */
+.dots {
+	display: flex;
+	gap: 6px;
+	margin-left: 8px;
+}
+.dots button {
+	width: 44px;
+	height: 44px;
+	background: none;
+	border: 0;
+	display: grid;
+	place-items: center;
+	padding: 0;
+}
+.dots button::after {
+	content: "";
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	border: 2px solid #fff;
+}
+.dots button.on::after {
+	background: #fff;
+}
+
+/* ============================================================
+   QUICK BOOKING BAR
+   The card under the hero with dates and guests.
+   ============================================================ */
+.book {
+	position: relative;
+	z-index: 5;
+	margin: -52px auto 0;
+	max-width: 1160px;
+	padding: 0 20px;
+}
+/* Booking bar grid: five columns on desktop */
+.book form {
+	background: var(--cream);
+	border: 1px solid var(--line);
+	border-radius: 22px;
+	box-shadow: 0 20px 50px rgba(60, 35, 15, .18);
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 1.4fr 1.4fr .8fr .8fr auto;
+	gap: 14px;
+	align-items: start;
+}
+
+/* ============================================================
+   FORM FIELDS
+   Labels, inputs, selects and error messages. A field with .bad shows its error.
+   ============================================================ */
+label {
+	display: block;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--mu);
+	margin-bottom: 6px;
+}
+input, select {
+	width: 100%;
+	min-height: 48px;
+	padding: 0 14px;
+	border: 1px solid #cdbfa5;
+	border-radius: 12px;
+	background: #fff;
+}
+/* Error text, hidden until the field has .bad */
+.err {
+	display: none;
+	color: #A12A1C;
+	font-size: 14px;
+	margin-top: 6px;
+}
+.bad+.err {
+	display: block;
+}
+.bad {
+	border-color: #A12A1C;
+}
+
+/* ============================================================
+   HOME PAGE SECTIONS
+   Spacing, headings, welcome text, highlight boxes, service rows and gallery cards.
+   ============================================================ */
+section {
+	padding: var(--sp5) 0;
+}
+.alt {
+	background: var(--sand);
+}
+/* Section title */
+h2.t {
+	font-size: clamp(28px, 4vw, 42px);
+	color: var(--clay);
+	margin-bottom: var(--sp2);
+}
+.lead {
+	max-width: 44em;
+	color: var(--mu);
+}
+.date {
+	color: var(--sea);
+	font-weight: 700;
+	margin-bottom: 8px;
+}
+/* "Read more" text that expands smoothly */
+.more {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows .4s;
+}
+.more.open {
+	grid-template-rows: 1fr;
+}
+.more>div {
+	overflow: hidden;
+}
+.rm {
+	background: none;
+	border: 0;
+	color: var(--clay);
+	font-weight: 700;
+	min-height: 44px;
+	text-decoration: underline;
+	text-underline-offset: 4px;
+	padding: 0;
+}
+/* Six highlight boxes */
+.feat {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: var(--sp2);
+	margin-top: var(--sp4);
+}
+.feat div {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 18px 20px;
+	background: var(--sand);
+	border-radius: 16px;
+	font-weight: 600;
+}
+.feat svg {
+	color: var(--clay);
+	width: 28px;
+	height: 28px;
+}
+/* Photo + text block; every second row flips sides */
+.row {
+	display: grid;
+	grid-template-columns: 1.1fr 1fr;
+	gap: var(--sp4);
+	align-items: center;
+	margin-bottom: var(--sp5);
+}
+.row:last-child {
+	margin-bottom: 0;
+}
+.row:nth-child(even) {
+	grid-template-columns: 1fr 1.1fr;
+}
+.row:nth-child(even) .ph {
+	order: 2;
+}
+/* Photo box: the photo comes from a p1..p9 class */
+.ph {
+	position: relative;
+	aspect-ratio: 4/3;
+	border-radius: 22px;
+	overflow: hidden;
+	background: var(--clay);
+}
+.ph svg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+/* Caption in the corner of a photo */
+.ph::after {
+	content: attr(data-l);
+	position: absolute;
+	left: 16px;
+	bottom: 12px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 600;
+	text-shadow: 0 1px 6px rgba(0, 0, 0, .5);
+}
+.row h3 {
+	font-size: 30px;
+	margin-bottom: 12px;
+}
+.row p {
+	color: var(--mu);
+	margin-bottom: 22px;
+	max-width: 30em;
+}
+.grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 22px;
+}
+/* Gallery card */
+.card {
+	background: var(--cream);
+	border: 1px solid var(--line);
+	border-radius: 20px;
+	overflow: hidden;
+	text-align: left;
+	padding: 0;
+	transition: box-shadow .25s, transform .25s;
+}
+.card:hover {
+	box-shadow: 0 14px 34px rgba(60, 35, 15, .16);
+	transform: translateY(-3px);
+}
+.card .ph {
+	border-radius: 0;
+	aspect-ratio: 16/10;
+}
+.card h3 {
+	font-size: 18px;
+	padding: 16px 18px 4px;
+}
+.card span {
+	display: block;
+	padding: 0 18px 18px;
+	color: var(--clay);
+	font-weight: 700;
+}
+
+/* ============================================================
+   FIND US
+   Map panel, contact list and newsletter form.
+   ============================================================ */
+.map {
+	display: grid;
+	grid-template-columns: 1.3fr 1fr;
+	gap: var(--sp4);
+}
+/* Map panel */
+.mp {
+	min-height: 320px;
+	border-radius: 22px;
+	background: linear-gradient(#EADFC7, #DCCBA8);
+	display: grid;
+	place-items: center;
+	text-align: center;
+	padding: 24px;
+	position: relative;
+	overflow: hidden;
+}
+.mp>* {
+	position: relative;
+}
+.mp p {
+	margin: 10px 0 20px;
+	font-weight: 600;
+}
+.list {
+	list-style: none;
+	padding: 0;
+	color: var(--mu);
+}
+.list li {
+	padding: 10px 0;
+	border-bottom: 1px solid var(--line);
+}
+/* Newsletter form row */
+.sf {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	margin-top: 14px;
+}
+.sf>div {
+	flex: 1 1 200px;
+}
+
+/* ============================================================
+   FOOTER
+   Dark footer with link columns.
+   ============================================================ */
+footer {
+	background: var(--ink);
+	color: #E9DEC9;
+	padding: 56px 0 28px;
+	font-size: 16px;
+}
+/* Footer columns */
+.fg {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 32px;
+}
+footer h4 {
+	font: 700 16px Karla;
+	color: var(--gold);
+	margin-bottom: 10px;
+}
+footer ul {
+	list-style: none;
+	padding: 0;
+}
+footer li a {
+	display: inline-block;
+	padding: 6px 0;
+}
+footer a:hover {
+	color: var(--gold);
+}
+.cp {
+	border-top: 1px solid #54433a;
+	margin-top: 32px;
+	padding-top: 18px;
+	text-align: center;
+}
+
+/* ============================================================
+   FLOATING BUTTON, DIALOG & TOAST
+   Feedback button, the pop-up dialog and the short toast message.
+   ============================================================ */
+.fab {
+	position: fixed;
+	right: 16px;
+	bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+	z-index: 50;
+	min-height: 48px;
+	padding: 0 22px;
+	border-radius: 999px;
+	border: 0;
+	background: var(--sea);
+	color: #fff;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+}
+.md {
+	position: fixed;
+	inset: 0;
+	background: rgba(43, 29, 20, .6);
+	display: none;
+	place-items: center;
+	z-index: 200;
+	padding: 20px;
+}
+.md.on {
+	display: grid;
+}
+/* Pop-up box */
+.mb {
+	background: var(--cream);
+	border-radius: 22px;
+	max-width: 480px;
+	width: 100%;
+	padding: 32px;
+	position: relative;
+	max-height: 90vh;
+	overflow: auto;
+}
+.x {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: none;
+	border: 0;
+	display: grid;
+	place-items: center;
+}
+.mb h3 {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+.mb p {
+	color: var(--mu);
+	margin-bottom: 14px;
+}
+.mb label {
+	margin-top: 12px;
+}
+.mb .btn {
+	margin-top: 18px;
+}
+/* Toast message */
+#toast {
+	position: fixed;
+	left: 50%;
+	bottom: 90px;
+	transform: translateX(-50%);
+	background: var(--ink);
+	color: #fff;
+	padding: 12px 22px;
+	border-radius: 12px;
+	z-index: 300;
+	display: none;
+	max-width: 90vw;
+}
+
+/* ============================================================
+   RESPONSIVE: TABLETS AND SMALLER
+   Menu becomes a button, columns stack.
+   ============================================================ */
+@media (max-width: 980px) {
+	/* Phone menu button, hidden on desktop */
+	.burger {
+		display: grid;
+		place-items: center;
+	}
+	nav {
+		display: none;
+		position: absolute;
+		top: 76px;
+		left: 0;
+		right: 0;
+		background: var(--cream);
+		border-bottom: 1px solid var(--line);
+		max-height: calc(100vh - 100px);
+		overflow: auto;
+		padding: 12px 20px 20px;
+	}
+	nav.open {
+		display: block;
+	}
+	/* Menu list laid out in a row */
+	nav ul {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	/* Menu links and dropdown buttons: at least 44px tall for easy tapping */
+	nav a, nav .dd {
+		justify-content: space-between;
+		border-radius: 12px;
+	}
+	/* "Book now" menu button */
+	nav .cta {
+		margin: 8px 0 0;
+		justify-content: center;
+	}
+	/* Dropdown panel, hidden until its button is opened */
+	.sub {
+		position: static;
+		box-shadow: none;
+		border: 0;
+		border-left: 3px solid var(--gold);
+		border-radius: 0;
+		margin-left: 12px;
+		background: none;
+	}
+	nav li:hover>.sub {
+		display: none;
+	}
+	nav li.open>.sub {
+		display: flex;
+	}
+	/* Booking bar grid: five columns on desktop */
+	.book form {
+		grid-template-columns: 1fr 1fr;
+	}
+	.book .btn {
+		grid-column: 1/-1;
+	}
+	/* Six highlight boxes */
+	.feat {
+		grid-template-columns: 1fr 1fr;
+	}
+	.grid {
+		grid-template-columns: 1fr 1fr;
+	}
+	/* Footer columns */
+	.fg {
+		grid-template-columns: 1fr 1fr;
+	}
+	/* Photo + text block; every second row flips sides */
+	.row, .row:nth-child(even), .map {
+		grid-template-columns: 1fr;
+	}
+	.row:nth-child(even) .ph {
+		order: 0;
+	}
+	.ctl {
+		bottom: 120px;
+	}
+}
+
+/* ============================================================
+   RESPONSIVE: PHONES
+   Single column layout, larger tap areas.
+   ============================================================ */
+@media (max-width: 560px) {
+	/* Default text: Karla font on the cream background */
+	body {
+		font-size: 16px;
+	}
+	.feat, .grid, .fg {
+		grid-template-columns: 1fr;
+	}
+	.book form {
+		grid-template-columns: 1fr;
+	}
+	section {
+		padding: 56px 0;
+	}
+	.fab span {
+		display: none;
+	}
+	.fab {
+		padding: 0;
+		width: 52px;
+		justify-content: center;
+	}
+}
+
+/* ============================================================
+   ACCESSIBILITY: LESS MOTION
+   Turns off animation for visitors who asked their device for less motion.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+	* {
+		transition: none!important;
+		scroll-behavior: auto!important;
+	}
+}
+.ph {
+	background-size: cover;
+	background-position: center;
+}
+.ph::before {
+	content: "";
+	position: absolute;
+	inset: auto 0 0;
+	height: 45%;
+	background: linear-gradient(transparent, rgba(0, 0, 0, .55));
+	z-index: 1;
+}
+.ph::after {
+	z-index: 2;
+}
+.mb.wide {
+	max-width: 920px;
+}
+.mb img {
+	width: 100%;
+	border-radius: 14px;
+	display: block;
+}
+.slide {
+	background-size: cover!important;
+}
+
+/* ============================================================
+   SERVICE PAGES
+   Banner, details column and booking form for rooms, dining, events and recreation.
+   ============================================================ */
+.sh {
+	position: relative;
+	min-height: 340px;
+	display: flex;
+	align-items: flex-end;
+	color: #fff;
+	background-size: cover;
+	background-position: center;
+}
+.sh::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(rgba(43, 29, 20, .25), rgba(43, 29, 20, .75));
+}
+.sh .w {
+	position: relative;
+	width: 100%;
+	padding-top: 90px;
+	padding-bottom: 36px;
+}
+.sh h1 {
+	font-size: clamp(32px, 5vw, 54px);
+}
+.sh p {
+	max-width: 36em;
+	margin-top: 10px;
+	font-size: 18px;
+}
+.crumb {
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+.crumb a {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+.sg2 {
+	display: grid;
+	grid-template-columns: 1.1fr 1fr;
+	gap: var(--sp4);
+	align-items: start;
+	padding: var(--sp5) 0;
+}
+.sg2 h2 {
+	font-size: 26px;
+	color: var(--clay);
+	margin-bottom: 14px;
+}
+/* Information card on service pages */
+.ic {
+	padding: 18px 20px;
+	background: var(--sand);
+	border-radius: 16px;
+	margin-bottom: 12px;
+}
+.ic h3 {
+	font-size: 18px;
+	margin-bottom: 4px;
+}
+.ic p {
+	color: var(--mu);
+}
+/* Pill-shaped tags */
+.tg {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 18px 0;
+}
+.tg li {
+	padding: 8px 16px;
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	font-weight: 600;
+	background: var(--cream);
+}
+/* Photo strip on service pages */
+.thumbs {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+	margin: 18px 0;
+}
+.thumbs div {
+	aspect-ratio: 4/3;
+	border-radius: 16px;
+	background-size: cover;
+	background-position: center;
+}
+/* Booking form card (sticks while scrolling on desktop) */
+.bf {
+	position: sticky;
+	top: 96px;
+	background: var(--cream);
+	border: 1px solid var(--line);
+	border-radius: 22px;
+	padding: 26px;
+	box-shadow: 0 20px 50px rgba(60, 35, 15, .14);
+}
+.bf h2 {
+	font-size: 24px;
+	margin-bottom: 4px;
+}
+.bf>p {
+	color: var(--mu);
+	margin-bottom: 16px;
+}
+/* Two-column form grid */
+.f2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 14px;
+}
+.full {
+	grid-column: 1/-1;
+}
+.bf .btn {
+	width: 100%;
+	margin-top: 6px;
+}
+/* Multi-line field */
+textarea {
+	width: 100%;
+	min-height: 96px;
+	padding: 12px 14px;
+	border: 1px solid #cdbfa5;
+	border-radius: 12px;
+	background: #fff;
+	resize: vertical;
+}
+/* Links to other service pages */
+.oth {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	padding-bottom: var(--sp5);
+}
+.oth a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 0 20px;
+	border-radius: 999px;
+	background: var(--sand);
+	font-weight: 600;
+}
+.oth a:hover {
+	background: var(--line);
+}
+@media (max-width: 980px) {
+	.sg2 {
+		grid-template-columns: 1fr;
+	}
+	/* Booking form card (sticks while scrolling on desktop) */
+	.bf {
+		position: static;
+	}
+}
+@media (max-width: 560px) {
+	/* Two-column form grid */
+	.f2 {
+		grid-template-columns: 1fr;
+	}
+}
+/* photos (paths are relative to this css file) */
+
+/* ============================================================
+   PHOTOS
+   Each class sets one photo. Used on service blocks, banners, gallery cards and slides. Paths are relative to this css file.
+   ============================================================ */
+.p1 {
+	background-image: url(../images/p1.jpg);
+}
+.p2 {
+	background-image: url(../images/p2.jpg);
+}
+.p3 {
+	background-image: url(../images/p3.jpg);
+}
+.p5 {
+	background-image: url(../images/p5.jpg);
+}
+.p6 {
+	background-image: url(../images/p6.jpg);
+}
+.p7 {
+	background-image: url(../images/p7.jpg);
+}
+.p8 {
+	background-image: url(../images/p8.jpg);
+}
+.p9 {
+	background-image: url(../images/p9.jpg);
+}
+.slide {
+	background-position: center;
+}
+.s1 {
+	background-image: linear-gradient(90deg, rgba(43, 29, 20, .72), rgba(43, 29, 20, .12) 70%), url(../images/p1.jpg);
+}
+.s2 {
+	background-image: linear-gradient(90deg, rgba(43, 29, 20, .72), rgba(43, 29, 20, .12) 70%), url(../images/p7.jpg);
+}
+.s3 {
+	background-image: linear-gradient(90deg, rgba(43, 29, 20, .72), rgba(43, 29, 20, .12) 70%), url(../images/p2.jpg);
+}
+.bgmap {
+	background: linear-gradient(rgba(252, 250, 243, .78), rgba(252, 250, 243, .78)), url(../images/p8.jpg) center/cover;
+}
